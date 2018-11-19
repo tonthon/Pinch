@@ -1,0 +1,7 @@
+{
+"/api/v1/": "/indicators",
+"/api/v1/:indicators": "/:indicators",
+"/api/v1/:indicators/:id":  "/:indicators/:id",
+"/api/v1/:client/:id/:indicators": "/:client/:id/:indicators"
+
+}
