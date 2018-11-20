@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  </head>
+  <body>
+    <h1> Client :</h1>
+  </body>
+  <script >
+    $(function(){
+      var socketIo = io();
+
+      socketIo.on('event', function(res){
+        // console.log('connect in html file', res)
+
+      })
+    })
+  </script>
+</html>
