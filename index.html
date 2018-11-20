@@ -13,10 +13,11 @@
     $(function(){
       var socketIo = io();
 
-      socketIo.on('event', function(res){
-        // console.log('connect in html file', res)
-
+      socketIo.on('start', function(msg){
+        console.log('Server say : '+msg)
+        socketIo.emit('start', 'hello you')
       })
+
     })
   </script>
 </html>

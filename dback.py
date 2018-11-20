@@ -1,5 +1,6 @@
 import json
 import requests
+import pprint
 # import all for websocket
 import socket
 import inotify, inotify.adapters
@@ -32,7 +33,7 @@ def _main():
 
     events = i.event_gen(yield_nones=False, timeout_s=1)
     events = list(events)
-    print(events)
+    pprint.pprint(events)
 
 
 _main()
@@ -49,8 +50,8 @@ _main()
 #     events = list(events)
 #     print(events)
 #
-#
 # _watchIno()
+#
 # socket part
 # local = socket.socket()
 # local.bind(('', 5050))
