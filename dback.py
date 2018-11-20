@@ -2,6 +2,7 @@ import json
 import requests
 # import all for websocket
 import socket
+import inotify, inotify.adapters
 
 class ConnectData():
 
@@ -19,17 +20,46 @@ class ConnectData():
             print(response.status_code)
 
 co = ConnectData()
-co.getData('indicators/1')
+# co.getData('indicators/1')
 
-local = socket.socket()
+def _main():
+    i = inotify.adapters.Inotify()
 
-local.bind(('', 5000))
-local.listen(1)
-print('hey')
-while True :
-    print 'accept'
-    c, addr = local.accept()
-    print 'Got connection from '+ addr
-    c.send('Connecting to Back-End')
+    i.add_watch('/tmp')
 
-c.close()
+    with open('/tmp/db.json', 'w'):
+        pass
+
+    events = i.event_gen(yield_nones=False, timeout_s=1)
+    events = list(events)
+    print(events)
+
+
+_main()
+
+# def _watchIno():
+#     i = inotify.adapters.Inotify()
+#     i.add_watch('/')
+#
+#     with open('db.json', 'w'):
+#         pass
+#
+#
+#     events = i.event_gen(yield_nones=False, timeout_s=1)
+#     events = list(events)
+#     print(events)
+#
+#
+# _watchIno()
+# socket part
+# local = socket.socket()
+# local.bind(('', 5050))
+# local.listen(1)
+# print('hey')
+# while True :
+#     print 'accept'
+#     c, addr = local.accept()
+#     print 'Got connection from '
+#     print addr
+#     c.send('Connecting to Back-End')
+# c.close()
