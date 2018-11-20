@@ -1,6 +1,7 @@
 import json
 import requests
 import pprint
+import os
 # import all for websocket
 import socket
 import inotify, inotify.adapters
@@ -25,33 +26,21 @@ co = ConnectData()
 
 def _main():
     i = inotify.adapters.Inotify()
-
-    i.add_watch('/tmp')
-
-    with open('/tmp/db.json', 'w'):
+    # set file to watch
+    i.add_watch(os.getcwd())
+    url = os.getcwd()+'/db.json'
+    print(url)
+    with open(url, 'w'):
         pass
 
     events = i.event_gen(yield_nones=False, timeout_s=1)
     events = list(events)
-    pprint.pprint(events)
+    print events
+    pprint.pprint(events[1])
 
 
 _main()
 
-# def _watchIno():
-#     i = inotify.adapters.Inotify()
-#     i.add_watch('/')
-#
-#     with open('db.json', 'w'):
-#         pass
-#
-#
-#     events = i.event_gen(yield_nones=False, timeout_s=1)
-#     events = list(events)
-#     print(events)
-#
-# _watchIno()
-#
 # socket part
 # local = socket.socket()
 # local.bind(('', 5050))
