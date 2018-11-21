@@ -20,23 +20,24 @@ class ConnectData():
 
         else:
             print(response.status_code)
-
 co = ConnectData()
 # co.getData('indicators/1')
 
 def _main():
     i = inotify.adapters.Inotify()
     # set file to watch
-    i.add_watch(os.getcwd())
     url = os.getcwd()+'/db.json'
-    print(url)
-    with open(url, 'w'):
+    i.add_watch(url)
+
+    with open(url, 'r'):
         pass
+
 
     events = i.event_gen(yield_nones=False, timeout_s=1)
     events = list(events)
-    print events
-    pprint.pprint(events[1])
+    # pprint.pprint(events)
+    print 'call more info'
+    pprint.pprint(events)
 
 
 _main()
