@@ -37,10 +37,8 @@ def _main():
     #     print("PATH=[{}] FILENAME=[{}] EVENT_TYPES={}".format(
     #           path, filename, type_names))
     events = i.event_gen(yield_nones=False, timeout_s=1)
-    events = list(events)
-    return events
+    yield events
 
-pprint.pprint(_main())
 
 async def testws(websocket, path):
     event = _main()
