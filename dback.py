@@ -48,6 +48,5 @@ async def testws(websocket, path):
 
 
 startserver = websockets.serve(testws, 'localhost', 5432)
-pprint.pprint(startserver)
 asyncio.get_event_loop().run_until_complete(startserver)
 asyncio.get_event_loop().run_forever()
