@@ -21,4 +21,6 @@ setInterval(function(){
   // io.emit('event', data)
 }, 10)
 
-http.listen(5000)
+http.listen(5050, function() {
+  console.log("Listen");
+})

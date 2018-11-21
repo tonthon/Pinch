@@ -9,15 +9,10 @@
   <body>
     <h1> Client :</h1>
   </body>
-  <script >
-    $(function(){
-      var socketIo = io();
+  <script>
+    var webs = new WebSocket('ws://localhost:5432')
+    console.log(webs);
 
-      socketIo.on('start', function(msg){
-        console.log('Server say : '+msg)
-        socketIo.emit('start', 'hello you')
-      })
 
-    })
   </script>
 </html>

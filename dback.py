@@ -3,7 +3,8 @@ import requests
 import pprint
 import os
 # import all for websocket
-import socket
+import asyncio
+import websockets
 import inotify, inotify.adapters
 
 class ConnectData():
@@ -21,7 +22,6 @@ class ConnectData():
         else:
             print(response.status_code)
 co = ConnectData()
-# co.getData('indicators/1')
 
 def _main():
     i = inotify.adapters.Inotify()
@@ -31,26 +31,25 @@ def _main():
 
     with open(url, 'r'):
         pass
-
-
+    # for event in i.event_gen(yield_nones=False):
+    #     (_, type_names, path, filename) = event
+    #
+    #     print("PATH=[{}] FILENAME=[{}] EVENT_TYPES={}".format(
+    #           path, filename, type_names))
     events = i.event_gen(yield_nones=False, timeout_s=1)
     events = list(events)
-    # pprint.pprint(events)
-    print 'call more info'
-    pprint.pprint(events)
+    return events
+
+pprint.pprint(_main())
+
+async def testws(websocket, path):
+    event = _main()
+    while event :#event inotify:
+
+        await websocket.send(event)
 
 
-_main()
-
-# socket part
-# local = socket.socket()
-# local.bind(('', 5050))
-# local.listen(1)
-# print('hey')
-# while True :
-#     print 'accept'
-#     c, addr = local.accept()
-#     print 'Got connection from '
-#     print addr
-#     c.send('Connecting to Back-End')
-# c.close()
+startserver = websockets.serve(testws, 'localhost', 5432)
+pprint.pprint(startserver)
+asyncio.get_event_loop().run_until_complete(startserver)
+asyncio.get_event_loop().run_forever()
